@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  replace-package-json:
+  replace-package-json-and-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,6 +24,6 @@ jobs:
           sed -i 's/"name": "pdfjs-dist"/"name": "@orca-fe\/pdfjs-dist-browserify"/g' package.json
       - name: print
         run: cat package.json
-      - run: npm publish
+      - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

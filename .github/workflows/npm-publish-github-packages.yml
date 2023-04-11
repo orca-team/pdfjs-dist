@@ -20,7 +20,7 @@ jobs:
         run: sed -i '/"canvas":/d' package.json
       - name: change package name
         run: >-
-          sed -i 's/"name": "pdfjs-dist"/"name": "@orca-fe/pdfjs-dist-browserify"/g' package.json
+          sed -i 's/"name": "pdfjs-dist"/"name": "@orca-fe\/pdfjs-dist-browserify"/g' package.json
       - name: print
         run: echo package.json
       

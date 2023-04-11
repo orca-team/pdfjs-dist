@@ -24,6 +24,9 @@ jobs:
           sed -i 's/"name": "pdfjs-dist"/"name": "@orca-fe\/pdfjs-dist-browserify"/g' package.json
       - name: print
         run: cat package.json
+      - name: replace require canvas
+        run: sed -i 's/require("canvas")/{}/g' build/pdfj.js
+      - run: sed -i 's/require("canvas")/{}/g' build/pdfj.min.js
       - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

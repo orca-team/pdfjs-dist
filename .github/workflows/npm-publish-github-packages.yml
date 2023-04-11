@@ -16,25 +16,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          registry-url: https://registry.npmjs.org/
       - name: remove canvas
         run: sed -i '/"canvas":/d' package.json
       - name: change package name
         run: >-
           sed -i 's/"name": "pdfjs-dist"/"name": "@orca-fe\/pdfjs-dist-browserify"/g' package.json
       - name: print
-        run: echo package.json
-      
-  publish:
-    needs: replace-package-json
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org/
+        run: cat package.json
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
